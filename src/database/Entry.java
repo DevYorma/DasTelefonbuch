@@ -27,4 +27,12 @@ public class Entry {
     public String getHousenumber() { return housenumber; }
     public String getTown() { return town; }
     public int getPLZ() { return plz; }
+
+    protected void setFirstname(String value) { firstname = value; }
+    protected void setLastname(String value) { lastname = value; }
+    protected void setPhonenumber(String value) { phonenumber = value; }
+    protected void setStreet(String value) { street = value; }
+    protected void setHousenumber(String value) { housenumber = value; }
+    protected void setTown(String value) { town = value; }
+    protected void setPLZ(int value) { plz = value; }
 }
