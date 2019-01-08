@@ -1,6 +1,6 @@
 package database;
 
-public class Horst {
+public class Entry {
     private String firstname = "";
     private String lastname = "";
     private String phonenumber = "";
@@ -10,7 +10,7 @@ public class Horst {
     private int plz = 12345;
 
 
-    public Horst(String firstname, String lastname, String phonenumber, String street, String housenumber, String town, int plz) {
+    public Entry(String firstname, String lastname, String phonenumber, String street, String housenumber, String town, int plz) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.phonenumber = phonenumber;

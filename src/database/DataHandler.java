@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataHandler {
-    protected static List<Horst> horsts = new ArrayList();
+    protected static List<Entry> entries = new ArrayList();
 
-    public static void addHorst(Horst horst) {
-        horsts.add(horst);
+    public static void addHorst(Entry entry) {
+        entries.add(entry);
     }
 
-    public static List getHorsts() {
-        return horsts;
+    public static List getEntries() {
+        return entries;
     }
 }
