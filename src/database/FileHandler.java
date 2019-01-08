@@ -1,13 +1,20 @@
 package database;
 
 import java.io.*;
+import java.net.URLDecoder;
 
 import static database.DataHandler.entries;
 
 public class FileHandler {
-    private static String file = "/Users/database.csv";
+    private String file;
+    {
+        try {
+            file = URLDecoder.decode(FileHandler.class.getProtectionDomain().getCodeSource().getLocation().getPath() + "database.csv", "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+        }
+    }
 
-    public static void readFile() {
+    public void readFile() {
         try(BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line = "";
             entries = null;
@@ -19,7 +26,7 @@ public class FileHandler {
         }
     }
 
-    public static void saveFile() {
+    public void saveFile() {
         try(FileWriter fw = new FileWriter(file)) {
             for(Entry entry : entries) {
                 fw.append(entry.getLastname());
