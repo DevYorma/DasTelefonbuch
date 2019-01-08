@@ -1,4 +1,3 @@
-
 import database.DataHandler;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -13,8 +12,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.util.Stack;
-
-//Max riecht nach Croissants
 
 public class Main extends Application {
     private DataHandler dh;
@@ -126,7 +123,7 @@ public class Main extends Application {
         sp.getChildren().add(lbl);
         sp.getChildren().add(btnList);
         sp.getChildren().add(Close);
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(sp, 600, 400));
         primaryStage.show();
     }
     public static void main(String[] args) {
