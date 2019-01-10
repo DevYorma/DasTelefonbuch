@@ -45,7 +45,7 @@ public class DataHandler {
             return true;
         }
         if(field == "plz") {
-            entry.setPLZ(Integer.valueOf(value));
+            entry.setPLZ(value);
             entries.add(entry);
             return true;
         }
