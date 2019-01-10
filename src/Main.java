@@ -1,6 +1,8 @@
+import com.sun.javafx.event.CompositeEventTarget;
 import database.DataHandler;
 import database.Entry;
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,9 +16,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.control.CheckBox;
+import javafx.geometry.Pos;
+import javafx.scene.layout.StackPane;
+
+import javax.xml.soap.Text;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
 public class Main extends Application {
     private DataHandler dh;
@@ -29,16 +40,16 @@ public class Main extends Application {
         //Button btn = new Button();
         //btn.setText("Change String");
         Label lbl = new Label();
+        StackPane.setMargin(lbl, new Insets(0,0,100,0));
         lbl.setWrapText(true);
         lbl.setText("Willkommen bei der DasTelefonbuch Software");
         primaryStage.setTitle("DasTelefonbuch Menü");
-        StackPane.setMargin(lbl, new Insets(0, 0, 80, 0));
         //StackPane.setMargin(btn, new Insets(0,250 , 0,0 ));
 
 
         Button newWindow = new Button();
+        StackPane.setMargin(newWindow, new Insets(0,280,0,0));
         newWindow.setText("Editor");
-        StackPane.setMargin(newWindow, new Insets(0, 0, 0, 0));
         newWindow.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -106,6 +117,7 @@ public class Main extends Application {
                 Window.setY(primaryStage.getY() + 100);
 
                 Window.show();
+                Window.setResizable(false);
 
                 save.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -121,7 +133,7 @@ public class Main extends Application {
                             txtt.clear();
                             worked.setText("Ihr Kontakt wurde gespeichert!");
                         }else{
-                            worked.setText("Bitte Überprüfen sie ihre eingabe");
+                            worked.setText("Bitte Überprüfen sie ihre Eingabe");
                         }
                     }
                 });
@@ -136,8 +148,8 @@ public class Main extends Application {
         });
 
         Button btnList = new Button();
+        StackPane.setMargin(btnList, new Insets(0,0,0,0));
         btnList.setText("Liste");
-        StackPane.setMargin(btnList, new Insets(0, 251, 0, 0));
         btnList.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -148,24 +160,14 @@ public class Main extends Application {
                 tabelle.setMinHeight(300);
                 TableColumn firstname = new TableColumn("Vorname");
                 firstname.setMinWidth(40);
-                TableColumn<Object, Object> lastname = new TableColumn<>("Nachname");
-                TableColumn<Object, Object> phone = new TableColumn<>("Telefonnummer");
-                TableColumn<Object, Object> street = new TableColumn<>("Straße");
-                TableColumn<Object, Object> hn = new TableColumn<>("Hausnummer");
-                TableColumn<Object, Object> town = new TableColumn<>("Stadt");
-                TableColumn<Object, Object> plz = new TableColumn<>("PLZ");
+                TableColumn lastname = new TableColumn("Nachname");
+                TableColumn phone = new TableColumn("Telefonnummer");
+                TableColumn street = new TableColumn("Straße");
+                TableColumn hn = new TableColumn("Hausnummer");
+                TableColumn town = new TableColumn("Stadt");
+                TableColumn plz = new TableColumn("PLZ");
                 //Label lbl3 = new Label("Hier ist die Liste, NR.1: Noch niemand");
                 Button Exit = new Button();
-                CheckBox checkf = new CheckBox();
-                checkf.setText("Vorname");
-                TextField search = new TextField();
-                search.setPromptText("Suchen!");
-                search.setMaxWidth(100);
-                search.setOnKeyReleased(keyEvent ->{
-                    checkf.isSelected();
-
-
-                });
                 Exit.setText("Zurück");
                 ObservableList<Entry> data = FXCollections.observableArrayList(dh.getEntries());
                 for(Entry entry : data){
@@ -177,6 +179,34 @@ public class Main extends Application {
                     town.setCellValueFactory(new PropertyValueFactory<> ("town"));
                     plz.setCellValueFactory(new PropertyValueFactory<> ("postcode"));
                 }
+
+
+                CheckBox checkf = new CheckBox();
+                CheckBox checkl = new CheckBox();
+                CheckBox checkp = new CheckBox();
+                CheckBox checks = new CheckBox();
+                CheckBox checkh = new CheckBox();
+                CheckBox checkt = new CheckBox();
+                CheckBox checkpl = new CheckBox();
+                checkf.setText("Vorname");
+                TextField search = new TextField();
+                search.setPromptText("Suchen!");
+                search.setMaxWidth(100);
+                search.setOnKeyReleased(keyEvent ->{
+                    checkf.isSelected();
+
+
+                });
+
+                Button del = new Button();
+                del.setText("X");
+                del.setPrefWidth(30);
+                del.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+
+                    }
+                });
 
                 StackPane List = new StackPane();
                 //List.getChildren().add(lbl3);
@@ -199,7 +229,7 @@ public class Main extends Application {
 
                 ListWindow.setX(primaryStage.getX() + 200);
                 ListWindow.setY(primaryStage.getY() + 100);
-
+                ListWindow.setResizable(false);
                 ListWindow.show();
 
                 Exit.setOnAction(new EventHandler<ActionEvent>() {
@@ -212,8 +242,8 @@ public class Main extends Application {
         });
 
         Button Close = new Button();
+        StackPane.setMargin(Close, new Insets(0,0,0,280));
         Close.setText("Exit");
-        StackPane.setMargin(Close, new Insets(0,0,0,250));
         Close.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -222,11 +252,11 @@ public class Main extends Application {
         });
         StackPane sp = new StackPane();
         sp.getChildren().add(newWindow);
-        //sp.getChildren().add(btn);
-        sp.getChildren().add(lbl);
         sp.getChildren().add(btnList);
+        sp.getChildren().add(lbl);
         sp.getChildren().add(Close);
         primaryStage.setScene(new Scene(sp, 400, 120));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
     public static void main(String[] args) {
