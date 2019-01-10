@@ -1,7 +1,6 @@
 import database.DataHandler;
 import database.Entry;
 import javafx.application.Application;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,12 +17,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.control.CheckBox;
-
-import javax.xml.soap.Text;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
 
 public class Main extends Application {
     private DataHandler dh;
@@ -148,19 +141,19 @@ public class Main extends Application {
         btnList.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DataHandler.addEntry(new Entry("Emil", "Müller", "67435", "Zum Träumen", "1a", "Musterstadt", "12345"));
-                DataHandler.addEntry(new Entry("Maria", "Müller", "67435", "Zum Träumen", "1a", "Musterstadt", "12346"));
+                //DataHandler.addEntry(new Entry("Emil", "Müller", "67435", "Zum Träumen", "1a", "Musterstadt", "12345"));
+                //DataHandler.addEntry(new Entry("Maria", "Müller", "67435", "Zum Träumen", "1a", "Musterstadt", "12346"));
                 TableView tabelle = new TableView();
                 tabelle.setMinWidth(600);
                 tabelle.setMinHeight(300);
                 TableColumn firstname = new TableColumn("Vorname");
                 firstname.setMinWidth(40);
-                TableColumn lastname = new TableColumn("Nachname");
-                TableColumn phone = new TableColumn("Telefonnummer");
-                TableColumn street = new TableColumn("Straße");
-                TableColumn hn = new TableColumn("Hausnummer");
-                TableColumn town = new TableColumn("Stadt");
-                TableColumn plz = new TableColumn("PLZ");
+                TableColumn<Object, Object> lastname = new TableColumn<>("Nachname");
+                TableColumn<Object, Object> phone = new TableColumn<>("Telefonnummer");
+                TableColumn<Object, Object> street = new TableColumn<>("Straße");
+                TableColumn<Object, Object> hn = new TableColumn<>("Hausnummer");
+                TableColumn<Object, Object> town = new TableColumn<>("Stadt");
+                TableColumn<Object, Object> plz = new TableColumn<>("PLZ");
                 //Label lbl3 = new Label("Hier ist die Liste, NR.1: Noch niemand");
                 Button Exit = new Button();
                 CheckBox checkf = new CheckBox();

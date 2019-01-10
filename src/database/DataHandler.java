@@ -8,11 +8,15 @@ public class DataHandler {
 
     public static void addEntry(Entry entry) {
         entries.add(entry);
+        FileHandler.saveFile();
     }
 
-    public static void removeEntry(Entry entry) { entries.remove(entry); }
+    public static void removeEntry(Entry entry) {
+        entries.remove(entry);
+        FileHandler.saveFile();
+    }
 
-    public static boolean editEntry(Entry entry, String field, String value) {
+    /*public static boolean editEntry(Entry entry, String field, String value) {
         entries.remove(entry);
         if(field.equalsIgnoreCase("firstname")) {
             entry.setFirstname(value);
@@ -50,9 +54,10 @@ public class DataHandler {
             return true;
         }
         return false;
-    }
+    }*/
 
     public static List getEntries() {
+        FileHandler.readFile();
         return entries;
     }
 }
