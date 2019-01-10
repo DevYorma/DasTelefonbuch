@@ -144,7 +144,7 @@ public class Main extends Application {
 
         Button btnList = new Button();
         btnList.setText("Liste");
-        StackPane.setMargin(btnList, new Insets(0, 250, 0, 0));
+        StackPane.setMargin(btnList, new Insets(0, 251, 0, 0));
         btnList.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
