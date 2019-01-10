@@ -45,7 +45,7 @@ public class DataHandler {
             return true;
         }
         if(field == "plz") {
-            entry.setPLZ(value);
+            entry.setPostcode(value);
             entries.add(entry);
             return true;
         }

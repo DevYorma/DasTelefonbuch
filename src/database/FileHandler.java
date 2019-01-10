@@ -39,7 +39,7 @@ public class FileHandler {
                 fw.append(",");
                 fw.append(entry.getHousenumber());
                 fw.append(",");
-                fw.append(entry.getPLZ());
+                fw.append(entry.getPostcode());
                 fw.append(",");
                 fw.append(entry.getTown());
             }
