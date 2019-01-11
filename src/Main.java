@@ -1,7 +1,9 @@
 import database.DataHandler;
 import database.Entry;
 import javafx.application.Application;
+import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -156,24 +158,36 @@ public class Main extends Application {
                 Button Exit = new Button();
                 CheckBox checkf = new CheckBox();
                 checkf.setText("Vorname");
+                checkf.setSelected(true);
+                checkf.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        updateSearch();
+                    }
+                });
                 CheckBox checkl = new CheckBox();
                 checkl.setText("Nachname");
+                checkl.setSelected(true);
                 CheckBox checkpn = new CheckBox();
                 checkpn.setText("Telefonnummer");
+                checkpn.setSelected(true);
                 CheckBox checks = new CheckBox();
                 checks.setText("Straße");
+                checks.setSelected(true);
                 CheckBox checkh = new CheckBox();
                 checkh.setText("Hausnummer");
+                checkh.setSelected(true);
                 CheckBox checkt = new CheckBox();
                 checkt.setText("Stadt");
+                checkt.setSelected(true);
                 CheckBox checkplz = new CheckBox();
                 checkplz.setText("PLZ");
+                checkplz.setSelected(true);
                 TextField search = new TextField();
                 search.setPromptText("Suchen!");
                 search.setMaxWidth(100);
                 Exit.setText("Zurück");
                 ObservableList<Entry> data = FXCollections.observableArrayList(dh.getEntries());
-                ObservableList<Entry> searchlist = null;
                 for(Entry entry : data){
                     firstname.setCellValueFactory(new PropertyValueFactory<> ("firstname"));
                     lastname.setCellValueFactory(new PropertyValueFactory<> ("lastname"));
@@ -185,48 +199,104 @@ public class Main extends Application {
                 }
                 tabelle.setItems(data);
                 search.setOnKeyReleased(keyEvent ->{
-                    checkf.isSelected();
+                    ObservableList<Entry> searchlist = FXCollections.observableArrayList();
                     for(Entry entry : data) {
                         if(!searchlist.contains(entry)) {
-                            if(checkf.isSelected()) {
-                                if(entry.getFirstname().toLowerCase().contains(search.getText().toLowerCase()))
+                            if (checkf.isSelected()) {
+                                if (entry.getFirstname().toLowerCase().contains(search.getText().toLowerCase())) {
+                                    firstname.setCellValueFactory(new PropertyValueFactory<>("firstname"));
+                                    lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+                                    phone.setCellValueFactory(new PropertyValueFactory<>("phonenumber"));
+                                    street.setCellValueFactory(new PropertyValueFactory<>("street"));
+                                    hn.setCellValueFactory(new PropertyValueFactory<>("housenumber"));
+                                    town.setCellValueFactory(new PropertyValueFactory<>("town"));
+                                    plz.setCellValueFactory(new PropertyValueFactory<>("postcode"));
                                     searchlist.add(entry);
+                                }
                             }
                         }
                         if(!searchlist.contains(entry)) {
-                            if(checkl.isSelected()) {
-                                if(entry.getLastname().toLowerCase().contains(search.getText().toLowerCase()))
+                            if (checkl.isSelected()) {
+                                if (entry.getLastname().toLowerCase().contains(search.getText().toLowerCase())) {
+                                    firstname.setCellValueFactory(new PropertyValueFactory<>("firstname"));
+                                    lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+                                    phone.setCellValueFactory(new PropertyValueFactory<>("phonenumber"));
+                                    street.setCellValueFactory(new PropertyValueFactory<>("street"));
+                                    hn.setCellValueFactory(new PropertyValueFactory<>("housenumber"));
+                                    town.setCellValueFactory(new PropertyValueFactory<>("town"));
+                                    plz.setCellValueFactory(new PropertyValueFactory<>("postcode"));
                                     searchlist.add(entry);
+                                }
                             }
                         }
                         if(!searchlist.contains(entry)) {
-                            if(checkpn.isSelected()) {
-                                if(entry.getPhonenumber().toLowerCase().contains(search.getText().toLowerCase()))
+                            if (checkpn.isSelected()) {
+                                if (entry.getPhonenumber().toLowerCase().contains(search.getText().toLowerCase())) {
+                                    firstname.setCellValueFactory(new PropertyValueFactory<>("firstname"));
+                                    lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+                                    phone.setCellValueFactory(new PropertyValueFactory<>("phonenumber"));
+                                    street.setCellValueFactory(new PropertyValueFactory<>("street"));
+                                    hn.setCellValueFactory(new PropertyValueFactory<>("housenumber"));
+                                    town.setCellValueFactory(new PropertyValueFactory<>("town"));
+                                    plz.setCellValueFactory(new PropertyValueFactory<>("postcode"));
                                     searchlist.add(entry);
+                                }
                             }
                         }
                         if(!searchlist.contains(entry)) {
-                            if(checks.isSelected()) {
-                                if(entry.getStreet().toLowerCase().contains(search.getText().toLowerCase()))
+                            if (checks.isSelected()) {
+                                if (entry.getStreet().toLowerCase().contains(search.getText().toLowerCase())) {
+                                    firstname.setCellValueFactory(new PropertyValueFactory<>("firstname"));
+                                    lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+                                    phone.setCellValueFactory(new PropertyValueFactory<>("phonenumber"));
+                                    street.setCellValueFactory(new PropertyValueFactory<>("street"));
+                                    hn.setCellValueFactory(new PropertyValueFactory<>("housenumber"));
+                                    town.setCellValueFactory(new PropertyValueFactory<>("town"));
+                                    plz.setCellValueFactory(new PropertyValueFactory<>("postcode"));
                                     searchlist.add(entry);
+                                }
                             }
                         }
                         if(!searchlist.contains(entry)) {
-                            if(checkh.isSelected()) {
-                                if(entry.getHousenumber().toLowerCase().contains(search.getText().toLowerCase()))
+                            if (checkh.isSelected()) {
+                                if (entry.getHousenumber().toLowerCase().contains(search.getText().toLowerCase())) {
+                                    firstname.setCellValueFactory(new PropertyValueFactory<>("firstname"));
+                                    lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+                                    phone.setCellValueFactory(new PropertyValueFactory<>("phonenumber"));
+                                    street.setCellValueFactory(new PropertyValueFactory<>("street"));
+                                    hn.setCellValueFactory(new PropertyValueFactory<>("housenumber"));
+                                    town.setCellValueFactory(new PropertyValueFactory<>("town"));
+                                    plz.setCellValueFactory(new PropertyValueFactory<>("postcode"));
                                     searchlist.add(entry);
+                                }
                             }
                         }
                         if(!searchlist.contains(entry)) {
-                            if(checkt.isSelected()) {
-                                if(entry.getTown().toLowerCase().contains(search.getText().toLowerCase()))
+                            if (checkt.isSelected()) {
+                                if (entry.getTown().toLowerCase().contains(search.getText().toLowerCase())) {
+                                    firstname.setCellValueFactory(new PropertyValueFactory<>("firstname"));
+                                    lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+                                    phone.setCellValueFactory(new PropertyValueFactory<>("phonenumber"));
+                                    street.setCellValueFactory(new PropertyValueFactory<>("street"));
+                                    hn.setCellValueFactory(new PropertyValueFactory<>("housenumber"));
+                                    town.setCellValueFactory(new PropertyValueFactory<>("town"));
+                                    plz.setCellValueFactory(new PropertyValueFactory<>("postcode"));
                                     searchlist.add(entry);
+                                }
                             }
                         }
                         if(!searchlist.contains(entry)) {
                             if(checkplz.isSelected()) {
-                                if(entry.getPostcode().toLowerCase().contains(search.getText().toLowerCase()))
+                                if(entry.getPostcode().toLowerCase().contains(search.getText().toLowerCase())) {
+                                    firstname.setCellValueFactory(new PropertyValueFactory<>("firstname"));
+                                    lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+                                    phone.setCellValueFactory(new PropertyValueFactory<>("phonenumber"));
+                                    street.setCellValueFactory(new PropertyValueFactory<>("street"));
+                                    hn.setCellValueFactory(new PropertyValueFactory<>("housenumber"));
+                                    town.setCellValueFactory(new PropertyValueFactory<>("town"));
+                                    plz.setCellValueFactory(new PropertyValueFactory<>("postcode"));
                                     searchlist.add(entry);
+                                }
                             }
                         }
                     }
@@ -242,10 +312,22 @@ public class Main extends Application {
                 List.getChildren().add(tabelle);
                 List.getChildren().add(search);
                 List.getChildren().add(checkf);
-                StackPane.setMargin(search, new Insets(0,500,370,0));
+                List.getChildren().add(checkl);
+                List.getChildren().add(checkpn);
+                List.getChildren().add(checks);
+                List.getChildren().add(checkh);
+                List.getChildren().add(checkt);
+                List.getChildren().add(checkplz);
+                StackPane.setMargin(search, new Insets(0,600,370,0));
                 StackPane.setMargin(tabelle, new Insets(30,0,0,0));
-                StackPane.setMargin(checkf, new Insets(0,300,370,0));
-                Scene ListScene = new Scene(List, 600, 400);
+                StackPane.setMargin(checkf, new Insets(0,400,370,0));
+                StackPane.setMargin(checkl, new Insets(0,230,370,0));
+                StackPane.setMargin(checkpn, new Insets(0,30,370,0));
+                StackPane.setMargin(checks, new Insets(0,0,370,150));
+                StackPane.setMargin(checkh, new Insets(0,0,370,320));
+                StackPane.setMargin(checkt, new Insets(0,0,370,490));
+                StackPane.setMargin(checkplz, new Insets(0,0,370,600));
+                Scene ListScene = new Scene(List, 800, 400);
 
                 Stage ListWindow = new Stage();
                 ListWindow.setTitle("Liste");
