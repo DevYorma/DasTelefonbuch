@@ -22,9 +22,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.CheckBox;
 
 public class Main extends Application {
-    private DataHandler dh;
-
-    @Override
+@Override
     public void start(final Stage primaryStage) throws Exception {
         //DataHandler.addEntry(new Entry("Emil", "Müller", "67435", "Zum Träumen", "1a", "Musterstadt", 12345));
         //DataHandler.addEntry(new Entry("Maria", "Müller", "67435", "Zum Träumen", "1a", "Musterstadt", 12345));

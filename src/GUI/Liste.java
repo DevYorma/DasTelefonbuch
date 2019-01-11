@@ -16,14 +16,13 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Liste {
-    private static DataHandler dh;
     public static void show(Stage primaryStage) {
         TableView tabelle = new TableView();
         tabelle.setMinWidth(600);
         tabelle.setMinHeight(300);
         tabelle.setEditable(true);
         tabelle.getSelectionModel().cellSelectionEnabledProperty().set(true);
-        TableColumn<Entry, String> firstname = new TableColumn("Vorname");
+        TableColumn<Entry, String> firstname = new TableColumn<>("Vorname");
         firstname.setMinWidth(40);
         TableColumn<Entry, String> lastname = new TableColumn<>("Nachname");
         TableColumn<Entry, String> phone = new TableColumn<>("Telefonnummer");
@@ -100,7 +99,7 @@ public class Liste {
             }
         });
         Exit.setText("Zurück");
-        ObservableList<Entry> data = FXCollections.observableArrayList(dh.getEntries());
+        ObservableList<Entry> data = FXCollections.observableArrayList(DataHandler.getEntries());
         for(Entry entry : data){
             firstname.setCellValueFactory(new PropertyValueFactory<>("firstname"));
             lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));

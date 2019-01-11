@@ -16,46 +16,6 @@ public class DataHandler {
         FileHandler.saveFile();
     }
 
-    /*public static boolean editEntry(Entry entry, String field, String value) {
-        entries.remove(entry);
-        if(field.equalsIgnoreCase("firstname")) {
-            entry.setFirstname(value);
-            entries.add(entry);
-            return true;
-        }
-        if(field.equalsIgnoreCase("lastname")) {
-            entry.setLastname(value);
-            entries.add(entry);
-            return true;
-        }
-        if(field.equalsIgnoreCase("phonenumber")) {
-            entry.setPhonenumber(value);
-            entries.add(entry);
-            return true;
-        }
-        if(field.equalsIgnoreCase("street")) {
-            entry.setStreet(value);
-            entries.add(entry);
-            return true;
-        }
-        if(field == "housenumber") {
-            entry.setHousenumber(value);
-            entries.add(entry);
-            return true;
-        }
-        if(field == "town") {
-            entry.setTown(value);
-            entries.add(entry);
-            return true;
-        }
-        if(field == "plz") {
-            entry.setPostcode(value);
-            entries.add(entry);
-            return true;
-        }
-        return false;
-    }*/
-
     public static List getEntries() {
         FileHandler.readFile();
         return entries;

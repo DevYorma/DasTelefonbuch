@@ -7,7 +7,7 @@ public class Entry {
     private String street = "";
     private String housenumber = "";
     private String town = "";
-    private String postcode = "12345";
+    private String postcode = "";
 
 
     public Entry(String firstname, String lastname, String phonenumber, String street, String housenumber, String town, String postcode) {

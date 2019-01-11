@@ -13,7 +13,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Editor {
-    private static DataHandler dh;
     public static void show(final Stage primaryStage) {
         Label lblf = new Label("Vorname: ");
         Label lbll = new Label("Nachname: ");
@@ -84,7 +83,7 @@ public class Editor {
             @Override
             public void handle(ActionEvent event) {
                 if(txtf.getText().length() != 0 && txtl.getText().length() != 0 && txtp.getText().length() != 0 && txts.getText().length() != 0 && txtt.getText().length() != 0 && txtpl.getText().length() != 0) {
-                    dh.addEntry(new Entry(txtf.getText(), txtl.getText(), txtp.getText(), txts.getText(), txth.getText(), txtt.getText(), txtpl.getText()));
+                    DataHandler.addEntry(new Entry(txtf.getText(), txtl.getText(), txtp.getText(), txts.getText(), txth.getText(), txtt.getText(), txtpl.getText()));
                     txtf.clear();
                     txth.clear();
                     txtl.clear();
@@ -94,7 +93,7 @@ public class Editor {
                     txtt.clear();
                     worked.setText("Ihr Kontakt wurde gespeichert!");
                 }else{
-                    worked.setText("Bitte Überprüfen sie ihre eingabe");
+                    worked.setText("Bitte Überprüfen sie ihre Eingabe!");
                 }
             }
         });
