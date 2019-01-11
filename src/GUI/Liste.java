@@ -142,7 +142,7 @@ public class Liste {
 
         ListWindow.setX(primaryStage.getX() + 200);
         ListWindow.setY(primaryStage.getY() + 100);
-
+        ListWindow.setResizable(false);
         ListWindow.show();
 
         Exit.setOnAction(new EventHandler<ActionEvent>() {
