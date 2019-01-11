@@ -2,6 +2,7 @@ package GUI;
 
 import database.DataHandler;
 import database.Entry;
+import database.FileHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +11,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -19,14 +21,16 @@ public class Liste {
         TableView tabelle = new TableView();
         tabelle.setMinWidth(600);
         tabelle.setMinHeight(300);
-        TableColumn firstname = new TableColumn("Vorname");
+        tabelle.setEditable(true);
+        tabelle.getSelectionModel().cellSelectionEnabledProperty().set(true);
+        TableColumn<Entry, String> firstname = new TableColumn("Vorname");
         firstname.setMinWidth(40);
-        TableColumn<Object, Object> lastname = new TableColumn<>("Nachname");
-        TableColumn<Object, Object> phone = new TableColumn<>("Telefonnummer");
-        TableColumn<Object, Object> street = new TableColumn<>("Straße");
-        TableColumn<Object, Object> hn = new TableColumn<>("Hausnummer");
-        TableColumn<Object, Object> town = new TableColumn<>("Stadt");
-        TableColumn<Object, Object> plz = new TableColumn<>("PLZ");
+        TableColumn<Entry, String> lastname = new TableColumn<>("Nachname");
+        TableColumn<Entry, String> phone = new TableColumn<>("Telefonnummer");
+        TableColumn<Entry, String> street = new TableColumn<>("Straße");
+        TableColumn<Entry, String> hn = new TableColumn<>("Hausnummer");
+        TableColumn<Entry, String> town = new TableColumn<>("Stadt");
+        TableColumn<Entry, String> plz = new TableColumn<>("PLZ");
         //Label lbl3 = new Label("Hier ist die Liste, NR.1: Noch niemand");
         Button Exit = new Button();
         CheckBox checkf = new CheckBox();
@@ -99,7 +103,7 @@ public class Liste {
         ObservableList<Entry> data = FXCollections.observableArrayList(dh.getEntries());
         for(Entry entry : data){
             firstname.setCellValueFactory(new PropertyValueFactory<>("firstname"));
-            lastname.setCellValueFactory(new PropertyValueFactory<> ("lastname"));
+            lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
             phone.setCellValueFactory(new PropertyValueFactory<> ("phonenumber"));
             street.setCellValueFactory(new PropertyValueFactory<> ("street"));
             hn.setCellValueFactory(new PropertyValueFactory<> ("housenumber"));
@@ -109,6 +113,62 @@ public class Liste {
         tabelle.setItems(data);
         search.setOnKeyReleased(keyEvent ->{
             Functions.updateSearch(tabelle, firstname, lastname, phone, street, hn, town, plz, search, checkf, checkl, checkpn, checks, checkh, checkt, checkplz);
+        });
+        firstname.setCellFactory(TextFieldTableCell.forTableColumn());
+        firstname.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Entry, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Entry, String> event) {
+                event.getTableView().getItems().get(event.getTablePosition().getRow()).setFirstname(event.getNewValue());
+                FileHandler.saveFile();
+            }
+        });
+        lastname.setCellFactory(TextFieldTableCell.forTableColumn());
+        lastname.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Entry, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Entry, String> event) {
+                event.getTableView().getItems().get(event.getTablePosition().getRow()).setLastname(event.getNewValue());
+                FileHandler.saveFile();
+            }
+        });
+        phone.setCellFactory(TextFieldTableCell.forTableColumn());
+        phone.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Entry, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Entry, String> event) {
+                event.getTableView().getItems().get(event.getTablePosition().getRow()).setPhonenumber(event.getNewValue());
+                FileHandler.saveFile();
+            }
+        });
+        street.setCellFactory(TextFieldTableCell.forTableColumn());
+        street.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Entry, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Entry, String> event) {
+                event.getTableView().getItems().get(event.getTablePosition().getRow()).setStreet(event.getNewValue());
+                FileHandler.saveFile();
+            }
+        });
+        hn.setCellFactory(TextFieldTableCell.forTableColumn());
+        hn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Entry, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Entry, String> event) {
+                event.getTableView().getItems().get(event.getTablePosition().getRow()).setHousenumber(event.getNewValue());
+                FileHandler.saveFile();
+            }
+        });
+        town.setCellFactory(TextFieldTableCell.forTableColumn());
+        town.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Entry, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Entry, String> event) {
+                event.getTableView().getItems().get(event.getTablePosition().getRow()).setTown(event.getNewValue());
+                FileHandler.saveFile();
+            }
+        });
+        plz.setCellFactory(TextFieldTableCell.forTableColumn());
+        plz.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Entry, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Entry, String> event) {
+                event.getTableView().getItems().get(event.getTablePosition().getRow()).setPostcode(event.getNewValue());
+                FileHandler.saveFile();
+            }
         });
         StackPane List = new StackPane();
         //List.getChildren().add(lbl3);
