@@ -1,7 +1,12 @@
 package GUI;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.sun.prism.impl.Disposer;
 import database.DataHandler;
 import database.Entry;
+import javafx.application.Application;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,9 +14,19 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import com.sun.prism.impl.Disposer.Record;
+
+import javax.xml.crypto.Data;
+import java.security.cert.TrustAnchor;
+
 
 public class Liste {
     private static DataHandler dh;
@@ -110,6 +125,33 @@ public class Liste {
         search.setOnKeyReleased(keyEvent ->{
             Functions.updateSearch(tabelle, firstname, lastname, phone, street, hn, town, plz, search, checkf, checkl, checkpn, checks, checkh, checkt, checkplz);
         });
+
+        /*TableColumn del = new TableColumn<>("X");
+        tabelle.getColumns().add(del);
+
+        del.setCellValueFactory(
+                new Callback<TableColumn.CellDataFeatures<Entry, Boolean>,
+                ObservableValue<Boolean>>(){
+
+                    @Override
+                        public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Entry, Boolean> p){
+                            return new SimpleBooleanProperty(p.getValue() != null);
+                        }
+
+                });
+
+        del.setCellFactory(
+                new Callback<TableColumn<Entry, Boolean>, TableCell<Entry, Boolean>>() {
+
+                    @Override
+                    public TableCell<Entry, Boolean> call(TableColumn<Entry, Boolean> p) {
+                        return new DataHandler();
+                    }
+                });*/
+
+
+
+
         StackPane List = new StackPane();
         //List.getChildren().add(lbl3);
         //StackPane.setMargin(lbl3, new Insets(0,400,380,0));
@@ -142,8 +184,10 @@ public class Liste {
 
         ListWindow.setX(primaryStage.getX() + 200);
         ListWindow.setY(primaryStage.getY() + 100);
+        ListWindow.setResizable(false);
 
         ListWindow.show();
+
 
         Exit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -153,3 +197,16 @@ public class Liste {
         });
     }
 }
+/*private class ButtonCell extends TableCell<Entry, Boolean>{
+        final Button cellb = new Button("Delete");
+
+        ButtonCell(){
+
+            cellb.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    Entry centry = (Entry) ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex());
+                    data.remove();
+                }
+            });
+        }*/

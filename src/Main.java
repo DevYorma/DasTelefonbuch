@@ -56,6 +56,7 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 Liste.show(primaryStage);
+
             }
         });
 
@@ -76,6 +77,7 @@ public class Main extends Application {
         sp.getChildren().add(Close);
         primaryStage.setScene(new Scene(sp, 400, 120));
         primaryStage.show();
+        primaryStage.setResizable(false);
     }
     public static void main(String[] args) {
         launch(args);
