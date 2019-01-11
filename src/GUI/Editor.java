@@ -76,6 +76,7 @@ public class Editor {
         //Position of the Window
         Window.setX(primaryStage.getX() + 200);
         Window.setY(primaryStage.getY() + 100);
+        Window.setResizable(false);
 
         Window.show();
 
