@@ -83,7 +83,9 @@ public class Editor {
         save.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(txtf.getText().length() != 0 && txtl.getText().length() != 0 && txtp.getText().length() != 0 && txts.getText().length() != 0 && txtt.getText().length() != 0 && txtpl.getText().length() != 0) {
+                boolean correct_length = txtf.getText().length() != 0 && txtl.getText().length() != 0 && txtp.getText().length() >= 3 && txts.getText().length() != 0 && txth.getText().length() != 0 && txtt.getText().length() != 0 && txtpl.getText().length() != 0;
+                boolean correct_ex = txtf.getText().matches("((\\w|Ä|ä|Ö|ö|Ü|ü|ß)-?)*\\w") && txtl.getText().matches("((\\w|Ä|ä|Ö|ö|Ü|ü|ß)-?)*\\w") && txtp.getText().matches("(((\\+|((00)|(\\(00\\)) ?))\\d{1,3} ?)|(0 ?))?((((\\d{1,4})|((\\d{2} \\d{2}){1,2}))( \\d)? ?/? ?((\\d{1,20})|(\\d{2}( \\d{2}){1,4}( \\d)?))(-\\d{2,8})?)|(\\d{2}(.\\d{2}){1,4}))") && txts.getText().matches("((\\w|Ä|ä|Ö|ö|Ü|ü|ß)-?)*\\w") && txth.getText().matches("\\d+\\w?") && txts.getText().matches("((\\w|Ä|ä|Ö|ö|Ü|ü|ß)-?)*\\w") && txtt.getText().matches("((\\w|Ä|ä|Ö|ö|Ü|ü|ß)-?)*\\w") && txtpl.getText().matches("\\d{4,6}");
+                if(correct_length && correct_ex) {
                     DataHandler.addEntry(new Entry(txtf.getText(), txtl.getText(), txtp.getText(), txts.getText(), txth.getText(), txtt.getText(), txtpl.getText()));
                     txtf.clear();
                     txth.clear();
@@ -94,7 +96,17 @@ public class Editor {
                     txtt.clear();
                     worked.setText("Ihr Kontakt wurde gespeichert!");
                 }else{
+                    String out = "";
                     worked.setText("Bitte Überprüfen sie ihre Eingabe!");
+                    if(txtf.getText().matches("((\\w|Ä|ä|Ö|ö|Ü|ü|ß)-?)*\\w"))
+                        out += ("F: " + txtf.getText());
+                    if(txtl.getText().matches("((\\w|Ä|ä|Ö|ö|Ü|ü|ß)-?)*\\w"))
+                        out += ("L: " + txtl.getText());
+                    if(txts.getText().matches("((\\w|Ä|ä|Ö|ö|Ü|ü|ß)-?)*\\w"))
+                        out += ("S: " + txts.getText());
+                    if(txtt.getText().matches("((\\w|Ä|ä|Ö|ö|Ü|ü|ß)-?)*\\w"))
+                        out += ("T: " + txtt.getText());
+                    worked.setText(out);
                 }
             }
         });

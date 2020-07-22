@@ -12,6 +12,20 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class Functions {
 
+    public static void update(TableView tabelle, TableColumn firstname, TableColumn lastname, TableColumn phone, TableColumn street, TableColumn hn, TableColumn town, TableColumn plz) {
+        ObservableList<Entry> data = FXCollections.observableArrayList(DataHandler.getEntries());
+        for(Entry entry : data){
+            firstname.setCellValueFactory(new PropertyValueFactory<>("firstname"));
+            lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+            phone.setCellValueFactory(new PropertyValueFactory<> ("phonenumber"));
+            street.setCellValueFactory(new PropertyValueFactory<> ("street"));
+            hn.setCellValueFactory(new PropertyValueFactory<> ("housenumber"));
+            town.setCellValueFactory(new PropertyValueFactory<> ("town"));
+            plz.setCellValueFactory(new PropertyValueFactory<> ("postcode"));
+        }
+        tabelle.setItems(data);
+    }
+
     public static void updateSearch(TableView tabelle, TableColumn firstname, TableColumn lastname, TableColumn phone, TableColumn street, TableColumn hn, TableColumn town, TableColumn plz, TextField search, CheckBox checkf, CheckBox checkl, CheckBox checkpn, CheckBox checks, CheckBox checkh, CheckBox checkt, CheckBox checkplz) {
         ObservableList<Entry> list = FXCollections.observableArrayList(DataHandler.getEntries());
         ObservableList<Entry> searchlist = FXCollections.observableArrayList();
